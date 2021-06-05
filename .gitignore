@@ -1,9 +1,10 @@
-settings.py
+config.py
 .DS_Store
 .env
 .flaskenv
 *.pyc
 *.pyo
+__pycache__/
 env/
 venv/
 .venv/
