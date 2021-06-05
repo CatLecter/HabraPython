@@ -29,4 +29,4 @@ def weather_by_city(city_name):
 
 
 if __name__ == "__main__":
-    print(weather_by_city("Moscow,Russia"))
+    print(weather_by_city(current_app.config["WEATHER_DEFAULT_CITY"]))
