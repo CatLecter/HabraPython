@@ -49,15 +49,15 @@ def create_app():
             if user and user.check_password(form.password.data):
                 login_user(user)
                 flash("Вы успешно вошли на сайт")
-                return redirect(url_for("inxex"))
+                return redirect(url_for("index"))
+            else:
+                flash("Неправильно введены логин или пароль")
+                return redirect(url_for("login"))
 
-            flash("Неправильно введены логин или пароль")
-            return redirect(url_for("login"))
-
-        @app.rout("/logout")
-        def logout():
-            logout_user()
-            flash("Вы вышли из провиля")
-            return redirect(url_for("index"))
+    @app.route("/logout")
+    def logout():
+        logout_user()
+        flash("Вы вышли из провиля")
+        return redirect(url_for("index"))
 
     return app

@@ -8,14 +8,14 @@ from webapp.model import User
 app = create_app()
 
 with app.app_context():
-    user_name = input("Введите имя:")
+    user_name = input("Введите имя: ")
 
     if User.query.filter(User.user_name == user_name).count():
         print("Пользователь с таким именем уже существует")
         sys.exit(0)
 
-    password_first = getpass("Введите пароль")
-    password_repeat = getpass("повторите пароль")
+    password_first = getpass("Введите пароль: ")
+    password_repeat = getpass("Повторите пароль: ")
 
     if not password_first == password_repeat:
         print("Пароли не совпадают")
