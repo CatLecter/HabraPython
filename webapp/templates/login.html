@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ru">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -11,18 +12,35 @@
   <title>{{ page_title }}</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Новости Python</h1>
+    <div class="container">
     <div class="row">
-      <div class="col-8">
-        <h2>Новости</h2> {% for news in news_list %}
-        <h3><a href="{{ news.url }}">{{ news.title }}</a></h3>
-        <p>{{ news.published.strftime("%d.%m.%Y") }}</p>
-        <hr /> {% endfor %}
+      <div class="col-auto">
+          <h1 class="display-5" align="center">{{ page_title }}</h1>
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <div class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                  {{ message }}<br>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endwith %}
+          <form action="{{ url_for('process_login') }}" method="POST">
+              {{ form.hidden_tag() }}
+              <div class="mb-2">
+                  {{ form.user_name.label }}
+                  {{ form.user_name() }}
+              </div>
+              <div class="mb-2">
+                  {{ form.password.label }}
+                  {{ form.password() }}
+              </div>
+              {{ form.submit() }}
+          </form>
       </div>
-      <div class="col-4">
-        <h2>Прогноз погоды</h2> {% if weather %} {{ weather.temp_C }}, ощущается как {{ weather.FeelsLikeC }} {% else %} Сервис погоды временно недоступен {% endif %}
-      </div>
+      <div class="col-9">
+        
+    </div>
     </div>
   </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
