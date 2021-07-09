@@ -1,7 +1,9 @@
+import webapp
 from flask import Blueprint, flash, render_template, redirect, url_for
 from flask_login import current_user, login_user, logout_user
 
-from webapp.user.forms import LoginForm
+from webapp.db import db
+from webapp.user.forms import LoginForm, RegistrationForm
 from webapp.user.models import User
 
 blueprint = Blueprint("user", __name__, url_prefix="/users")
@@ -29,7 +31,7 @@ def process_login():
             login_user(user, remember=form.remember_me.data)
             flash("Вы успешно вошли на сайт")
             return redirect(url_for("news.index"))
-        
+
     flash("Неправильно введены логин или пароль")
     return redirect(url_for("user.login"))
 
@@ -39,3 +41,35 @@ def logout():
     logout_user()
     flash("Вы вышли из провиля")
     return redirect(url_for("news.index"))
+
+
+@blueprint.route("/reg")
+def reg():
+    if current_user.is_authenticated:
+        return redirect(url_for("news.index"))
+    title = "Регистрация"
+    login_form = RegistrationForm()
+    return render_template(
+        "user/reg.html",
+        page_title=title,
+        form=login_form,
+    )
+
+
+@blueprint.route("/process-reg", methods=["POST"])
+def process_reg():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        new_user = User(
+            user_name=form.user_name.data,
+            email=form.email.data,
+            age=form.age.data,
+            role="user",
+            )
+        new_user.set_password(form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+        flash("Вы успешно зарегистрировались!")
+        return redirect(url_for("user.login"))
+    flash("Ошибка регистрации, пожалуйста проверьте введённые данные")
+    return redirect(url_for("user.reg"))
