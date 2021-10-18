@@ -1,12 +1,12 @@
-from flask import Flask, render_template, flash, redirect, url_for
+from flask import Flask, flash, redirect, render_template, url_for
 from flask_login import LoginManager, current_user, login_required
 from flask_migrate import Migrate
 
-from webapp.db import db
-from webapp.user.models import User
 from webapp.admin.views import blueprint as admin_blueprint
-from webapp.user.views import blueprint as user_blueprint
+from webapp.db import db
 from webapp.news.views import blueprint as news_blueprint
+from webapp.user.models import User
+from webapp.user.views import blueprint as user_blueprint
 from webapp.weather import weather_by_city
 
 
@@ -28,4 +28,3 @@ def create_app():
         return User.query.get(user_id)
 
     return app
-    

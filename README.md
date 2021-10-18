@@ -13,13 +13,14 @@
 
 ## 3) Миграции:
 
-#### $env:FLASK_APP="webapp" | flask db init
+#### export FLASK_APP="webapp" && flask db init
 
 #### move webapp.db webapp.db.old
 
 ### Создание миграции:
 
-#### $env:FLASK_APP="webapp"
-#### flask db migrate -m "users and news table"
+#### export FLASK_APP="webapp" && flask db migrate -m "users and news table"
+
+#### flask db upgrade
 
 #### flask db stamp <Revision ID>

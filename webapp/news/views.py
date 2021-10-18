@@ -5,6 +5,7 @@ from webapp.weather import weather_by_city
 
 blueprint = Blueprint("news", __name__)
 
+
 @blueprint.route("/")
 def index():
     title = "Новости Python"

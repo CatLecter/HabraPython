@@ -3,7 +3,6 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 
-
 from webapp.db import db
 from webapp.news.models import News
 

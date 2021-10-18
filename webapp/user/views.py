@@ -1,7 +1,7 @@
-import webapp
-from flask import Blueprint, flash, render_template, redirect, url_for
+from flask import Blueprint, flash, redirect, render_template, url_for
 from flask_login import current_user, login_user, logout_user
 
+import webapp
 from webapp.db import db
 from webapp.user.forms import LoginForm, RegistrationForm
 from webapp.user.models import User
@@ -65,7 +65,7 @@ def process_reg():
             email=form.email.data,
             age=form.age.data,
             role="user",
-            )
+        )
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()

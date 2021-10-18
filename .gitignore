@@ -1,4 +1,6 @@
 config.py
+create_admin.py
+create_db.py
 .DS_Store
 .env
 .flaskenv
